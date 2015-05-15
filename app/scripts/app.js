@@ -23,7 +23,7 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/about', {
+      .when('#/tfm', {
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
       })
@@ -31,3 +31,5 @@ angular
         redirectTo: '/'
       });
   });
+
+
