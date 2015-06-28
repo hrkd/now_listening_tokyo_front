@@ -12,7 +12,7 @@ Run `grunt` for building and `grunt serve` for preview.
 ## Deploy
 
 `grunt build`
-`grunt buildcontroll:pages`
+`grunt buildcontrol:pages`
 
 ## Testing
 
