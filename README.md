@@ -1,6 +1,11 @@
 # now-listening-tokyo-front
 Music that have been delivered from the radio station in Tokyo.
 
+## deploy
+```
+grunt buildcontrol:pages
+```
+
 
 This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
 version 0.11.1.
