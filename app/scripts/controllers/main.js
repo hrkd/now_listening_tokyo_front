@@ -8,20 +8,33 @@
  * Controller of the nowListeningTokyoFrontApp
  */
 angular.module('nowListeningTokyoFrontApp')
-  .controller('MainCtrl', function ($scope,$http,$rootScope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('MainCtrl', function ($scope,$YtModel,$cookieStore) {
+    var path = location.hash.replace('#/',''),
+        promise,
+        defaultStation = 'jwave';
 
-      $http.jsonp("http://api.nowlistening.tokyo/jwave?callback=JSON_CALLBACK")
-          .success(function(data, status, headers, config){
-            //SharedService=data;
-            $scope.data = data;
-            $rootScope.$broadcast('result',data);
-          })
-          .error(function(data,status,headers,config){
+    console.log($cookieStore.get('station'));
+    if(!$cookieStore.get('station')){
+      $cookieStore.put('station',defaultStation);
+    }
+
+    //ルートであればクッキーのパス情報を利用
+    path = (path=='') ? $cookieStore.get('station') : path;
+
+    //パス情報をクッキーに保存
+    $cookieStore.put('station',path);
+    $scope.path = path;
+
+    //youtubeのapiからの返却をpromiseで受け取る
+    promise = $YtModel(path);
+
+    promise.then(
+      function(resolveObj){
+        console.log('resolve');
+        console.log(resolveObj);
+        $scope.info = resolveObj;
+      },
+      function(rejectObj){
+        console.log("error");
       });
-
   });
